@@ -39,7 +39,7 @@ chmod u+x app.sh
 
 Ahmad Faqehi - [iAhmad.info](https://iAhmad.info) - alfaqehi775@hotmail.com
 
-Project Link: [https://github.com/Ahmad-Faqehi/Locker_System](https://github.com/Ahmad-Faqehi/Locker_System)
+Project Link: [https://github.com/Ahmad-Faqehi/Docker-Deployer-Cli](https://github.com/Ahmad-Faqehi/Docker-Deployer-Cli)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
