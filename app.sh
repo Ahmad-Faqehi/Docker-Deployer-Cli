@@ -18,7 +18,8 @@ Options:
 8- Remove Coniner
 9- Download tar file from TFS 
 10- Show logs
-11- Exit
+11- Pull Image from Docker Hub
+12- Exit
 
 ";
 
@@ -43,7 +44,9 @@ then
 elif [ $option == 2 ] # todo: 2- Show Images
 then
     docker images;
-
+    echo " "
+    read -p 'Press enter to continue... ' someran
+    continue
 
 elif [ $option == 3 ] # todo: 3- Tag Image
 then
@@ -124,16 +127,25 @@ then
 elif [ $option == 6 ] # todo: 6- Stop Continer
 then
      docker ps;
+     echo " "
       read -p 'Enter continer ID, or enter [N] to back: ' continer_id
+    if [ $continer_id == 'N' ]
+    then
+    clear
+    continue
+    fi
      docker stop $continer_id
 
 elif [ $option == 7 ]
 then
     docker ps;
+    echo " "
+    read -p 'Press enter to continue... ' someran
+    continue
 
 elif [ $option == 8 ] # todo: 8- Remove Continer
 then
-    read -p 'Are you sure you want remove an container? [Y] [N]: ' remove
+    read -p 'Are you sure you want remove an container? [Y / N]: ' remove
     if [ $remove == 'Y' ]
     then
      docker ps -a;
@@ -149,17 +161,18 @@ then
     clear
     continue
     fi
-    read -p 'Enter File Name with tar extension, or enter [N] to back: ' file_name
-    if [ $file_name == 'N' ]
-    then
-    clear
-    continue
-    fi
-    curl --location --request GET $url_tar --header "Authorization: Basic $tfs_token" -o $file_name
-
+    # read -p 'Enter File Name with tar extension, or enter [N] to back: ' file_name
+    # if [ $file_name == 'N' ]
+    # then
+    # clear
+    # continue
+    # fi
+    #curl --location --request GET $url_tar --header "Authorization: Basic $tfs_token" -o $file_name
+    wget --header="Authorization: Bearer $tfs_token" $url_tar
 elif [ $option == 10 ]
 then
-    docker ps
+    docker ps;
+    echo " " 
     read -p 'Enter continer id, or enter [N] to back: ' continer_id
     if [ $continer_id == 'N' ]
     then
@@ -170,7 +183,12 @@ then
 
 elif [ $option == 11 ] # todo: 10- Exit
 then
-    exit
+    read -p 'Enter image name: or enter [N] to back: ' image_name
+    docker pull $image_name
+
+elif [ $option == 12 ]
+then
+exit
 else
     echo "Wrong chooes."
 fi
